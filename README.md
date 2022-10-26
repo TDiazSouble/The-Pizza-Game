@@ -13,7 +13,7 @@ Python Tkinter GUI.
 - Optimize code
 - Longer storyline
 - More levels
-- More images
+- More images and move all images to another folder
 
 ##################################
 

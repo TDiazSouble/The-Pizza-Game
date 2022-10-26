@@ -26,7 +26,6 @@ class spanish_version(tk.Tk):
         self.intro()
         
     ## encoding and decoding saved game ##
-
         
     def encode(self, clear):
         key = '4'
@@ -466,7 +465,7 @@ class spanish_version(tk.Tk):
     #### Actions ####
 
     def intro_kill(self): 
-        def intro_kill2(self): # calling funtion after delay
+        def intro_kill2(): # calling funtion after delay
             self.introFrame.forget()
             self.menu()
         global timer
@@ -631,20 +630,20 @@ class spanish_version(tk.Tk):
 
     def bBack_howto(self): #go back to the menu
         self.menu()
-        howtoFrame.forget()
+        self.howtoFrame.forget()
 
     #### howtoFrame ####
 
     def howto(self):
         
         global howtoFrame
-        howtoFrame = Frame(
+        self.howtoFrame = Frame(
             self,
             bg='black'
         )
         
         howtoTitle = Label(
-            howtoFrame,
+            self.howtoFrame,
             bg='black',
             fg='white',
             font=('Felix Titling',30),
@@ -652,8 +651,8 @@ class spanish_version(tk.Tk):
             text='Como jugar'
         ).grid(row=0,column=1,pady=15) 
             
-        canvasHowto = Canvas()
-        canvasHowto = tk.Canvas(howtoFrame,bg='black',width=1000,height=350,highlightthickness=0)
+        # canvasHowto = Canvas()
+        canvasHowto = tk.Canvas(self.howtoFrame,bg='black',width=1000,height=350,highlightthickness=0)
         canvasHowto.grid(row=1,column=1,pady=50)
         canvasHowto_text = canvasHowto.create_text(0, 0, text='', anchor=tk.NW, fill='white')
 
@@ -696,7 +695,7 @@ class spanish_version(tk.Tk):
             counter += 1
         
         bBackHowto = Button(
-            howtoFrame,
+            self.howtoFrame,
             bg='black',
             fg='white',
             font=('Felix Titling',15),
@@ -708,7 +707,7 @@ class spanish_version(tk.Tk):
         ).grid(row=2,column=0,pady=10)
         
         bSalir = Button(   
-            howtoFrame,     
+            self.howtoFrame,     
             text='Salir',
             command=lambda:self.quit(),
             bd=0,
@@ -719,7 +718,7 @@ class spanish_version(tk.Tk):
             font=('Felix Titling',15)
         ).grid(row=2,column=3,pady=10)
         
-        howtoFrame.pack()
+        self.howtoFrame.pack()
 
     ###################################    main     ########
 
@@ -748,12 +747,12 @@ class spanish_version(tk.Tk):
         tried_list = []
 
 ######################################################## English
-
+"""
 class english_version(tk.Tk):
     
     ###################################    Root     ########
     
-    def __init__(self):
+    def __init__(self,container):
         super().__init__()
         
         self.title("The Pizza Game")
@@ -761,7 +760,7 @@ class english_version(tk.Tk):
         self.attributes('-fullscreen',True)
         self.config(bg='black',cursor='crosshair')
         self.iconbitmap('Pizza.ico')
-        self.photo = PhotoImage(file='Pizza.png', master=self)
+        self.photo = PhotoImage(file='Pizza.png',master=self)
         self.restartVariables()
         self.saved_game()
         self.intro()
@@ -802,7 +801,7 @@ class english_version(tk.Tk):
 
     def botonHighscores(self): #go to the highscores screen
         self.highscores()
-        menuFrame.forget() 
+        self.menuFrame.forget() 
 
     def botonComoJugar(self): #go to how to play screen
         self.howto()
@@ -1486,14 +1485,13 @@ then you guessed 2 positions.'''
     def restartVariables(self):
         global tried_list
         tried_list = []
-
+"""
 ######################################################## Launcher
 
 class launcher(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        
         self.title("The Pizza Game")
         self.config(bg='black',cursor='crosshair')
         self.iconbitmap('Pizza.ico')
@@ -1507,8 +1505,7 @@ class launcher(tk.Tk):
     def botonStart(self):
         
         spanish = spanish_version(self)
-        spanish.mainloop()
-        tk.destroy()
+        self.destroy()
 
     def launcherGame(self):
         global launcherFrame

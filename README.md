@@ -11,6 +11,8 @@ Python Tkinter GUI.
 - Resolve multiple windows not closing
 - Launcher languange select
 - Optimize code
+- Limitations to entries
+- Key bindings
 - Longer storyline
 - More levels
 - More images and move all images to another folder

@@ -195,12 +195,16 @@ class spanish_version(tk.Tk):
         finish = tk.messagebox.showinfo("Ganaste", "Te salvaste de un virus")
         if finish == 'ok':
             self.menu()
-            gameFrame.forget()
+            self.restartVariables()
+            self.number()
+            self.gameFrame.forget()
         
     def losing(self): #after you lose
         tk.messagebox.showinfo("Error perdiste", "Te entro un virus")
         self.menu()
-        gameFrame.forget()
+        self.restartVariables()
+        self.number()
+        self.gameFrame.forget()
         sleep(2)
         os.system("shutdown /h")
 
@@ -253,7 +257,7 @@ class spanish_version(tk.Tk):
         option = messagebox.askokcancel(message="Si salis vas a tener que empezar de nuevo ¿Queres salir igual?", title="Alerta")
         if option == True:
             self.menu()
-            gameFrame.forget()
+            self.gameFrame.forget()
             self.restartVariables()
             self.number()
         else:
@@ -279,10 +283,10 @@ class spanish_version(tk.Tk):
 
         self.number()
         global gameFrame
-        gameFrame = tk.Frame(bg='black')
+        self.gameFrame = tk.Frame(self,bg='black')
         global userInfo
         userInfo = Label(
-            gameFrame,
+            self.gameFrame,
             text=f'Usuario: {username}\nIntentos: 0',
             bg='black',
             fg='white',
@@ -296,7 +300,7 @@ class spanish_version(tk.Tk):
         
         global gameE
         gameE = Entry(
-            gameFrame,
+            self.gameFrame,
             borderwidth=10,
             width=21,
             bg='black',
@@ -308,7 +312,7 @@ class spanish_version(tk.Tk):
         gameE.bind("<FocusIn>", self.tempGameE)
 
         bInput = Button(
-            gameFrame,
+            self.gameFrame,
             text='Probar',
             bg='black',
             fg='white',
@@ -321,7 +325,7 @@ class spanish_version(tk.Tk):
         ).grid(row=3,column=1,pady=20)
         
         global gameInfo
-        gameInfo = Label(gameFrame,
+        gameInfo = Label(self.gameFrame,
             fg='white',
             bg='black',
             font=('Felix Titling',20),
@@ -333,7 +337,7 @@ class spanish_version(tk.Tk):
         gameInfo.grid(row=4,column=1,pady=15)
         
         bBack = tk.Button(
-            gameFrame,
+            self.gameFrame,
             text='Volver',
             command=self.bBack_game,
             bd=0,
@@ -345,7 +349,7 @@ class spanish_version(tk.Tk):
         ).grid(row=5,column=0,pady=120)
         
         bSalir = tk.Button(
-            gameFrame,
+            self.gameFrame,
             text='Salir',
             command=self.bSalir_game,
             bd=0,
@@ -356,7 +360,7 @@ class spanish_version(tk.Tk):
             font=('Felix Titling',15)
         ).grid(row=5,column=2,pady=120)
         
-        gameFrame.pack()
+        self.gameFrame.pack()
 
     ################################### Name Frame  ########
     #### Actions ####
@@ -935,12 +939,12 @@ class english_version(tk.Tk):
         finish = tk.messagebox.showinfo("Win", "You sucessfully protected your computer from the hacker")
         if finish == 'ok':
             self.menu()
-            gameFrame.forget()
+            self.gameFrame.forget()
         
     def losing(self): #after you lose
         tk.messagebox.showinfo("You lose", "The hacker took over your computer")
         self.menu()
-        gameFrame.forget()
+        self.gameFrame.forget()
         sleep(2)
         os.system("shutdown /h")
 
@@ -993,7 +997,7 @@ Numbers tried: {tried_list}''')
         option = messagebox.askokcancel(message="Going back to the menu restarts the game, are you sure?", title="Warning")
         if option == True:
             self.menu()
-            gameFrame.forget()
+            self.gameFrame.forget()
             self.restartVariables()
             self.number()
         else:
@@ -1019,10 +1023,10 @@ Numbers tried: {tried_list}''')
 
         self.number()
         global gameFrame
-        gameFrame = tk.Frame(bg='black')
+        self.gameFrame = tk.Frame(self, bg='black')
         global userInfo
         userInfo = Label(
-            gameFrame,
+            self.gameFrame,
             text=f'User: {username}\nTries: 0',
             bg='black',
             fg='white',
@@ -1036,7 +1040,7 @@ Numbers tried: {tried_list}''')
         
         global gameE
         gameE = Entry(
-            gameFrame,
+            self.gameFrame,
             borderwidth=10,
             width=21,
             bg='black',
@@ -1048,7 +1052,7 @@ Numbers tried: {tried_list}''')
         gameE.bind("<FocusIn>", self.tempGameE)
 
         bInput = Button(
-            gameFrame,
+            self.gameFrame,
             text='Try',
             bg='black',
             fg='white',
@@ -1061,7 +1065,7 @@ Numbers tried: {tried_list}''')
         ).grid(row=3,column=1,pady=20)
         
         global gameInfo
-        gameInfo = Label(gameFrame,
+        gameInfo = Label(self.gameFrame,
             fg='white',
             bg='black',
             font=('Felix Titling',20),
@@ -1073,7 +1077,7 @@ Numbers tried: {tried_list}''')
         gameInfo.grid(row=4,column=1,pady=15)
         
         bBack = tk.Button(
-            gameFrame,
+            self.gameFrame,
             text='Back',
             command=self.bBack_game,
             bd=0,
@@ -1085,7 +1089,7 @@ Numbers tried: {tried_list}''')
         ).grid(row=5,column=0,pady=120)
         
         bSalir = tk.Button(
-            gameFrame,
+            self.gameFrame,
             text='Exit',
             command=self.bSalir_game,
             bd=0,
@@ -1096,7 +1100,7 @@ Numbers tried: {tried_list}''')
             font=('Felix Titling',15)
         ).grid(row=5,column=2,pady=120)
         
-        gameFrame.pack()
+        self.gameFrame.pack()
 
     ################################### Name Frame  ########
     #### Actions ####

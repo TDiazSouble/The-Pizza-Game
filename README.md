@@ -10,6 +10,7 @@ Python Tkinter GUI.
 - Launcher languange select
 - Better winning or losing screen
 - Optimize code
+- Variables and functions following convetions
 - Limitations to entries
 - Key bindings
 - Longer storyline

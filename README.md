@@ -26,7 +26,7 @@ Solved:
 ### Languages ###
 
 - Spanish
-- English
+- English (coming in next updates)
 
 ##################################
 

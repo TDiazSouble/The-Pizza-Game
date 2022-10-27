@@ -1,7 +1,8 @@
+from msilib.schema import ComboBox
 import tkinter as tk
 from tkinter import *
 from ctypes import windll
-from tkinter import messagebox
+from tkinter import messagebox,ttk
 import re, random, os, base64
 from time import sleep
 
@@ -751,7 +752,7 @@ class spanish_version(tk.Tk):
         tried_list = []
 
 ######################################################## English
-"""
+
 class english_version(tk.Tk):
     
     ###################################    Root     ########
@@ -1489,7 +1490,7 @@ then you guessed 2 positions.'''
     def restartVariables(self):
         global tried_list
         tried_list = []
-"""
+
 ######################################################## Launcher
 
 class launcher(tk.Tk):
@@ -1500,18 +1501,26 @@ class launcher(tk.Tk):
         self.config(bg='black',cursor='crosshair')
         self.iconbitmap('Pizza.ico')
         self.photo = PhotoImage(file='Pizza.png')
-        self.launcherGame()       
-  
-    def botonLanguage(self):
-        global option
-        option = 'spanish'
-    
-    def botonStart(self):
-        
-        spanish = spanish_version(self)
-        self.destroy()
+        self.settingsData ={'language':1}
+        self.launcherGame()
 
-    def launcherGame(self):
+    def botonStart(self):
+        if self.settingsData['language'] == 0:
+            english = english_version(self)
+            self.destroy()
+        elif self.settingsData['language'] == 1:
+            spanish = spanish_version(self)
+            self.destroy()
+        else:
+            tk.messagebox.showinfo("Error", "No language selected")
+
+    def settingsLaunch(self):
+        self.settings()
+        self.launcherFrame.forget()
+
+    def launcherGame(self,*update):
+        if len(update)> 0: ## avoid error first time running
+            self.settingsData = update[0] ## convert tuple to dictionary
         global launcherFrame
         self.launcherFrame = tk.Frame(self)
         
@@ -1538,11 +1547,11 @@ class launcher(tk.Tk):
             activebackground='black',
             font=('Felix Titling',20)
         ).grid(row=1,column=0,pady=20)
-
-        bLanguage = tk.Button(
+        
+        bSettings = tk.Button(
             self.launcherFrame,
-            text='Language',
-            command=self.botonLanguage,
+            text='Settings',
+            command=self.settingsLaunch,
             bd=0,
             bg='black',
             fg='white',
@@ -1573,6 +1582,67 @@ class launcher(tk.Tk):
         
         self.launcherFrame.configure(bg='black')
         self.launcherFrame.pack()
+        
+        ########### settings frame #########
+        
+    def bBack_settings(self):
+        self.settingsData = {}
+        self.settingsData['language'] = self.language_number.get()
+        self.launcherGame(self.settingsData)
+        self.settingsFrame.forget()
+        
+    def settings(self):
+
+        global settingsFrame
+        self.settingsFrame = tk.Frame(self)
+        global language_number
+        self.language_number = IntVar(self,1)
+        
+        b_lang = Radiobutton(
+            self.settingsFrame,
+            text = "English",
+            variable = self.language_number,
+            indicator = 0,
+            bg='black',
+            fg='white',
+            value = 0,
+            highlightbackground='black',
+            selectcolor='green',
+            activebackground='grey',
+            activeforeground='white',
+            font=('Felix Titling',20)
+        ).grid(row=2,column=0,pady=20,padx=20)
+
+        b_lang = Radiobutton(
+            self.settingsFrame,
+            text = "Español",
+            variable = self.language_number,
+            activebackground='grey',
+            activeforeground='white',
+            highlightbackground='black',
+            selectcolor='green',
+            indicator = 0,
+            bg='black',
+            fg='white',
+            value = 1,
+            font=('Felix Titling',20)
+        ).grid(row=2,column=2,pady=20,padx=20)
+        
+        bBack = tk.Button(
+            self.settingsFrame,
+            text='Volver',
+            command=self.bBack_settings,
+            bd=0,
+            bg='black',
+            fg='white',
+            activeforeground='green',
+            activebackground='black',
+            font=('Felix Titling',15)
+        ).grid(row=3,column=0,pady=120)
+      
+        
+        self.settingsFrame.configure(bg='black')
+        self.settingsFrame.pack()
 
 #### start ####
 

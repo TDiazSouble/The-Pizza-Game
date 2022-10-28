@@ -192,7 +192,7 @@ class spanish_version(tk.Tk):
     def winning(self): #after you win
         self.writeScore()
         finish = 0
-        finish = tk.messagebox.showinfo("Ganaste", "Te salvaste de un virus")
+        finish = tk.messagebox.showinfo("Ganaste", "Te salvaste de un virus",master=self)
         if finish == 'ok':
             self.menu()
             self.restartVariables()
@@ -200,7 +200,7 @@ class spanish_version(tk.Tk):
             self.gameFrame.forget()
         
     def losing(self): #after you lose
-        tk.messagebox.showinfo("Error perdiste", "Te entro un virus")
+        tk.messagebox.showinfo("Error perdiste", "Te entro un virus",master=self)
         self.menu()
         self.restartVariables()
         self.number()
@@ -264,7 +264,7 @@ class spanish_version(tk.Tk):
             pass
 
     def bSalir_game(self):
-        option = messagebox.askokcancel(master=self,message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta")
+        option = messagebox.askokcancel(master=self,message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta",master=self)
         if option == True:
             self.quit()
         else:
@@ -377,7 +377,7 @@ class spanish_version(tk.Tk):
         global username
         username = str(nameE.get()) #get username
         if len(username) == 0:
-            messagebox.showinfo("Error", "Ingresaste un nombre incorrecto")
+            messagebox.showinfo("Error", "Ingresaste un nombre incorrecto",master=self)
         else:
             self.game()
             nameFrame.forget()
@@ -935,7 +935,7 @@ class english_version(tk.Tk):
     def winning(self): #after you win
         self.writeScore()
         finish = 0
-        finish = tk.messagebox.showinfo("Win", "You sucessfully protected your computer from the hacker")
+        finish = tk.messagebox.showinfo("Win", "You sucessfully protected your computer from the hacker",master=self)
         if finish == 'ok':
             self.menu()
             self.restartVariables()
@@ -943,7 +943,7 @@ class english_version(tk.Tk):
             self.gameFrame.forget()
                     
     def losing(self): #after you lose
-        tk.messagebox.showinfo("You lose", "The hacker took over your computer")
+        tk.messagebox.showinfo("You lose", "The hacker took over your computer",master=self)
         self.menu()
         self.restartVariables()
         self.number()
@@ -992,9 +992,9 @@ Numbers tried: {tried_list}''')
                     pass
             else:
                 gameE.delete(0,END)
-                messagebox.showinfo("Error", "Only 4 digits allowed")
+                messagebox.showinfo("Error", "Only 4 digits allowed",master=self)
         else:
-            messagebox.showinfo("Error", "No number")  
+            messagebox.showinfo("Error", "No number",master=self)  
         
     def bBack_game(self): #go back to the menu
         option = messagebox.askokcancel(master=self,message="Going back to the menu restarts the game, are you sure?", title="Warning")
@@ -1120,7 +1120,7 @@ Numbers tried: {tried_list}''')
         global username
         username = str(nameE.get()) #get username
         if len(username) == 0:
-            messagebox.showinfo("Error", "Incorrect name")
+            messagebox.showinfo("Error", "Incorrect name",master=self)
         else:
             self.game()
             nameFrame.forget()
@@ -1514,7 +1514,7 @@ class launcher(tk.Tk):
             spanish = spanish_version(self)
             self.destroy()
         else:
-            tk.messagebox.showinfo("Error", "No language selected")
+            tk.messagebox.showinfo("Error", "No language selected",master=self)
 
     def settingsLaunch(self):
         self.settings()

@@ -7,8 +7,6 @@ Python Tkinter GUI.
 
 ### Updates coming ###
 
-- Fix english language (copy spanish settings)
-- Laucher settings frame needs more widgets
 - Launcher set size and position
 - Better winning or losing screen
 - Optimize code
@@ -22,6 +20,8 @@ Python Tkinter GUI.
 
 Solved:
 
+- Fix english language
+- Launcher languange select
 - Resolve images problem
 - Resolve multiple windows not closing
 
@@ -30,8 +30,7 @@ Solved:
 ### Languages ###
 
 - Spanish
-- English (coming in next updates)
-- Launcher languange select
+- English 
 
 ##################################
 

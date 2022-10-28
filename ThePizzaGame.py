@@ -1,8 +1,7 @@
-from msilib.schema import ComboBox
 import tkinter as tk
 from tkinter import *
 from ctypes import windll
-from tkinter import messagebox,ttk
+from tkinter import messagebox
 import re, random, os, base64
 from time import sleep
 
@@ -255,17 +254,17 @@ class spanish_version(tk.Tk):
             messagebox.showinfo("Error", "No ingresaste un numero")  
         
     def bBack_game(self): #go back to the menu
-        option = messagebox.askokcancel(message="Si salis vas a tener que empezar de nuevo ¿Queres salir igual?", title="Alerta")
+        option = messagebox.askokcancel(master=self,message="Si salis vas a tener que empezar de nuevo ¿Queres salir igual?", title="Alerta")
         if option == True:
             self.menu()
-            self.gameFrame.forget()
             self.restartVariables()
             self.number()
+            self.gameFrame.forget()
         else:
             pass
 
     def bSalir_game(self):
-        option = messagebox.askokcancel(message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta")
+        option = messagebox.askokcancel(master=self,message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta")
         if option == True:
             self.quit()
         else:
@@ -656,7 +655,6 @@ class spanish_version(tk.Tk):
             text='Como jugar'
         ).grid(row=0,column=1,pady=15) 
             
-        # canvasHowto = Canvas()
         canvasHowto = tk.Canvas(self.howtoFrame,bg='black',width=1000,height=350,highlightthickness=0)
         canvasHowto.grid(row=1,column=1,pady=50)
         canvasHowto_text = canvasHowto.create_text(0, 0, text='', anchor=tk.NW, fill='white')
@@ -806,7 +804,7 @@ class english_version(tk.Tk):
 
     def botonHighscores(self): #go to the highscores screen
         self.highscores()
-        self.menuFrame.forget() 
+        menuFrame.forget() 
 
     def botonComoJugar(self): #go to how to play screen
         self.howto()
@@ -817,7 +815,7 @@ class english_version(tk.Tk):
     def menu(self):
 
         global menuFrame
-        menuFrame = tk.Frame()
+        menuFrame = tk.Frame(self)
         title_label = tk.Label(
             menuFrame,
             image=self.photo,
@@ -940,11 +938,15 @@ class english_version(tk.Tk):
         finish = tk.messagebox.showinfo("Win", "You sucessfully protected your computer from the hacker")
         if finish == 'ok':
             self.menu()
+            self.restartVariables()
+            self.number()
             self.gameFrame.forget()
-        
+                    
     def losing(self): #after you lose
         tk.messagebox.showinfo("You lose", "The hacker took over your computer")
         self.menu()
+        self.restartVariables()
+        self.number()
         self.gameFrame.forget()
         sleep(2)
         os.system("shutdown /h")
@@ -995,17 +997,17 @@ Numbers tried: {tried_list}''')
             messagebox.showinfo("Error", "No number")  
         
     def bBack_game(self): #go back to the menu
-        option = messagebox.askokcancel(message="Going back to the menu restarts the game, are you sure?", title="Warning")
+        option = messagebox.askokcancel(master=self,message="Going back to the menu restarts the game, are you sure?", title="Warning")
         if option == True:
             self.menu()
-            self.gameFrame.forget()
             self.restartVariables()
             self.number()
+            self.gameFrame.forget()
         else:
             pass
 
     def bSalir_game(self):
-        option = messagebox.askokcancel(message="¿Leaving your data unprotected against the hacker?¿Exit anyway?", title="Warning")
+        option = messagebox.askokcancel(master=self,message="¿Leaving your data unprotected against the hacker?¿Exit anyway?", title="Warning")
         if option == True:
             self.quit()
         else:
@@ -1375,20 +1377,20 @@ Are you taking the risk?'''
 
     def bBack_howto(self): #go back to the menu
         self.menu()
-        howtoFrame.forget()
+        self.howtoFrame.forget()
 
     #### howtoFrame ####
 
     def howto(self):
         
         global howtoFrame
-        howtoFrame = Frame(
+        self.howtoFrame = Frame(
             self,
             bg='black'
         )
         
         howtoTitle = Label(
-            howtoFrame,
+            self.howtoFrame,
             bg='black',
             fg='white',
             font=('Felix Titling',30),
@@ -1396,8 +1398,7 @@ Are you taking the risk?'''
             text='How to play'
         ).grid(row=0,column=1,pady=15) 
             
-        canvasHowto = Canvas()
-        canvasHowto = tk.Canvas(howtoFrame,bg='black',width=1000,height=350,highlightthickness=0)
+        canvasHowto = tk.Canvas(self.howtoFrame,bg='black',width=1000,height=350,highlightthickness=0)
         canvasHowto.grid(row=1,column=1,pady=50)
         canvasHowto_text = canvasHowto.create_text(0, 0, text='', anchor=tk.NW, fill='white')
 
@@ -1440,7 +1441,7 @@ then you guessed 2 positions.'''
             counter += 1
         
         bBackHowto = Button(
-            howtoFrame,
+            self.howtoFrame,
             bg='black',
             fg='white',
             font=('Felix Titling',15),
@@ -1452,7 +1453,7 @@ then you guessed 2 positions.'''
         ).grid(row=2,column=0,pady=10)
         
         bSalir = Button(   
-            howtoFrame,     
+            self.howtoFrame,     
             text='Exit',
             command=lambda:self.quit(),
             bd=0,
@@ -1463,7 +1464,7 @@ then you guessed 2 positions.'''
             font=('Felix Titling',15)
         ).grid(row=2,column=3,pady=10)
         
-        howtoFrame.pack()
+        self.howtoFrame.pack()
 
     ###################################    main     ########
 
@@ -1501,7 +1502,8 @@ class launcher(tk.Tk):
         self.config(bg='black',cursor='crosshair')
         self.iconbitmap('Pizza.ico')
         self.photo = PhotoImage(file='Pizza.png')
-        self.settingsData ={'language':1}
+        self.state('zoomed')
+        self.settingsData ={'language':0}
         self.launcherGame()
 
     def botonStart(self):
@@ -1583,23 +1585,52 @@ class launcher(tk.Tk):
         self.launcherFrame.configure(bg='black')
         self.launcherFrame.pack()
         
-        ########### settings frame #########
+    ########### settings frame #########
         
     def bBack_settings(self):
         self.settingsData = {}
         self.settingsData['language'] = self.language_number.get()
+        for widget in self.winfo_children():
+            widget.destroy()
         self.launcherGame(self.settingsData)
-        self.settingsFrame.forget()
         
-    def settings(self):
 
-        global settingsFrame
+    def settings(self):
+        
         self.settingsFrame = tk.Frame(self)
         global language_number
-        self.language_number = IntVar(self,1)
+        self.language_number = IntVar(self,0)
+        
+        settings_title = Frame(
+            self.settingsFrame,
+            bg='black'
+        )
+        
+        settings_title_label = Label(
+            settings_title,
+            text='Game Settings',
+            bg='black',
+            fg='white',
+            font=('Felix Titling',30)
+        ).pack()
+        
+        settings_title.pack(pady=40)
+
+        settings_options = Frame(
+            self.settingsFrame,
+            bg='black',
+        )
+
+        language_text = Label(
+            settings_options,
+            text='Language select: ',
+            bg='black',
+            fg='white',
+            font=('Felix Titling',20)
+        ).pack(side=LEFT,anchor='center',padx=20)
         
         b_lang = Radiobutton(
-            self.settingsFrame,
+            settings_options,
             text = "English",
             variable = self.language_number,
             indicator = 0,
@@ -1610,11 +1641,11 @@ class launcher(tk.Tk):
             selectcolor='green',
             activebackground='grey',
             activeforeground='white',
-            font=('Felix Titling',20)
-        ).grid(row=2,column=0,pady=20,padx=20)
+            font=('Felix Titling',15)
+        ).pack(side=RIGHT,anchor='center',padx=5)
 
         b_lang = Radiobutton(
-            self.settingsFrame,
+            settings_options,
             text = "Español",
             variable = self.language_number,
             activebackground='grey',
@@ -1625,8 +1656,10 @@ class launcher(tk.Tk):
             bg='black',
             fg='white',
             value = 1,
-            font=('Felix Titling',20)
-        ).grid(row=2,column=2,pady=20,padx=20)
+            font=('Felix Titling',15)
+        ).pack(side=RIGHT,anchor='center',padx=5)
+        
+        settings_options.pack(pady=80)
         
         bBack = tk.Button(
             self.settingsFrame,
@@ -1638,11 +1671,10 @@ class launcher(tk.Tk):
             activeforeground='green',
             activebackground='black',
             font=('Felix Titling',15)
-        ).grid(row=3,column=0,pady=120)
-      
+        ).pack(pady=80)
         
         self.settingsFrame.configure(bg='black')
-        self.settingsFrame.pack()
+        self.settingsFrame.pack(anchor='center', fill='both')
 
 #### start ####
 

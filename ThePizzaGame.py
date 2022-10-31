@@ -1594,12 +1594,15 @@ class launcher(tk.Tk):
             widget.destroy()
         self.launcherGame(self.settingsData)
         
-
     def settings(self):
         
         self.settingsFrame = tk.Frame(self)
         global language_number
-        self.language_number = IntVar(self,0)
+        try:
+            if self.language_number == 1:
+                pass
+        except:
+                self.language_number = IntVar(self,0)
         
         settings_title = Frame(
             self.settingsFrame,
@@ -1663,7 +1666,7 @@ class launcher(tk.Tk):
         
         bBack = tk.Button(
             self.settingsFrame,
-            text='Volver',
+            text='Back',
             command=self.bBack_settings,
             bd=0,
             bg='black',

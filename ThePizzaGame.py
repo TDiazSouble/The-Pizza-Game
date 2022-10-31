@@ -264,7 +264,7 @@ class spanish_version(tk.Tk):
             pass
 
     def bSalir_game(self):
-        option = messagebox.askokcancel(master=self,message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta",master=self)
+        option = messagebox.askokcancel(message="¿No vas a proteger tus datos del hacker?¿Queres salir igual?", title="Alerta",master=self)
         if option == True:
             self.quit()
         else:

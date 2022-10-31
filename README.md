@@ -7,7 +7,9 @@ Python Tkinter GUI.
 
 ### Updates coming ###
 
-- Launcher set size and position
+- Progress bar for the game
+- Exit confirmation on every screen
+- Launcher should change of language when selecting a language
 - Better winning or losing screen
 - Optimize code
 - Variables and functions following convetions
@@ -20,6 +22,7 @@ Python Tkinter GUI.
 
 Solved:
 
+- Launcher set size and position
 - Fix english language
 - Launcher languange select
 - Resolve images problem

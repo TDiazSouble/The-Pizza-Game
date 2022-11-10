@@ -5,6 +5,8 @@ Python Tkinter GUI.
 
 ##################################
 
+-----> Only works on windows <-----
+
 ### Updates coming ###
 
 - Progress bar for the game
